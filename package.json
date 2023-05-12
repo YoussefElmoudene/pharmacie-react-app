@@ -2,9 +2,13 @@
   "name": "vuexy-react-admin-dashboard",
   "version": "1.0.0",
   "private": true,
+  "proxy": "http://localhost:8037",
   "dependencies": {
     "@casl/ability": "5.2.2",
     "@casl/react": "2.1.1",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@fullcalendar/core": "5.7.2",
     "@fullcalendar/daygrid": "5.7.2",
     "@fullcalendar/interaction": "5.7.2",

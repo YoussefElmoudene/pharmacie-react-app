@@ -1,0 +1,34 @@
+table.responsive {
+  tbody {
+    tr {
+      td.icon {
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+
+    tr.ville__details {
+      min-height: 60px;
+      height: auto !important;
+      display: none;
+    }
+  }
+}
+
+table.responsive > tbody > tr {
+  height: 60px;
+}
+
+Button {
+  cursor: pointer;
+}
+
+strong {
+  color: black;
+  font-weight: bold;
+}
+
+strong.active {
+  color: #8d83f3;
+}
