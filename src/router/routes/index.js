@@ -18,7 +18,7 @@ const Routes = [
     },
     {
         path: '/pharmacies',
-        component: lazy(() => import('../../views/villes/Ville'))
+        component: lazy(() => import('../../views/pharmacy/Pharmacie'))
     },
     {
         path: '/second-page',
