@@ -17,8 +17,32 @@ const Routes = [
         component: lazy(() => import('../../views/villes/Ville'))
     },
     {
+        path: '/create-city',
+        component: lazy(() => import('../../views/villes/CreateVille'))
+    },
+    {
         path: '/pharmacies',
         component: lazy(() => import('../../views/pharmacy/Pharmacie'))
+    },
+    {
+        path: '/create-pharmacy',
+        component: lazy(() => import('../../views/pharmacy/CreatePharmacie'))
+    },
+    {
+        path: '/zones',
+        component: lazy(() => import('../../views/zone/Zone'))
+    },
+    {
+        path: '/create-zone',
+        component: lazy(() => import('../../views/zone/CreateZone'))
+    },
+    {
+        path: '/gardes',
+        component: lazy(() => import('../../views/garde/Garde'))
+    },
+    {
+        path: '/create-garde',
+        component: lazy(() => import('../../views/garde/CreateGarde'))
     },
     {
         path: '/second-page',

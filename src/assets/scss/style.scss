@@ -9,3 +9,30 @@ NOTE:
 ------
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.input__file {
+  border: 1px solid #d8d6de;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.dark-layout {
+  .input__file {
+    border: 1px solid #404656;
+    padding: 5px;
+    border-radius: 5px;
+    color: #676d7d;
+  }
+}
+
+.alert {
+  border: none;
+  height: 40px;
+  text-align: center;
+  padding: 10px;
+}
+
+.img__phar{
+  width: 50px;
+  border-radius: 5px;
+}

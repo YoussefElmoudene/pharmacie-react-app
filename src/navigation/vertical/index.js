@@ -1,6 +1,6 @@
 import {Home, Mail} from 'react-feather'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faBuilding, faPlusCircle, faPrescriptionBottle} from "@fortawesome/free-solid-svg-icons"
+import {faBuilding, faMapLocationDot, faMapMarked, faMapMarker, faPlusCircle} from "@fortawesome/free-solid-svg-icons"
 
 export default [
     {
@@ -18,8 +18,20 @@ export default [
     {
         id: 'pharmacies',
         title: 'Pharmacies',
-        icon: <FontAwesomeIcon icon={faPlusCircle} size={20} />,
+        icon: <FontAwesomeIcon icon={faPlusCircle} size={20}/>,
         navLink: '/pharmacies'
+    },
+    {
+        id: 'zones',
+        title: 'zones',
+        icon: <FontAwesomeIcon icon={faMapMarked} size={20}/>,
+        navLink: '/zones'
+    },
+    {
+        id: 'gardes',
+        title: 'gardes',
+        icon: <FontAwesomeIcon icon={faMapMarker} size={20}/>,
+        navLink: '/gardes'
     },
     {
         id: 'secondPage',

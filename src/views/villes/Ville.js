@@ -1,14 +1,16 @@
-import {Button, Card, CardBody, CardHeader, CardTitle, Table} from 'reactstrap'
+import {Alert, Button, Card, CardBody, CardHeader, CardTitle, Table} from 'reactstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faChevronDown, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons"
 import React, {useEffect, useState} from "react"
-import {get_villes} from "../../services/vlleService"
+import {delete_ville, get_villes} from "../../services/vlleService"
 import '../../assets/scss/home.scss'
+import {Link} from "react-router-dom"
 
 
-const Home = () => {
+const Ville = () => {
     const [cities, setCities] = useState([])
     const [isVisible, setIsVisible] = useState(false)
+    const [showAlert, setShowAlert] = useState(false)
     const [selectedCity, setSelectedCity] = useState(null)
 
 
@@ -24,6 +26,24 @@ const Home = () => {
         setIsVisible(isVisible)
         document.getElementById(id).style.display = display
     }
+    const deleteById = (id) => {
+        alert(id)
+        delete_ville(id).then(response => {
+            console.info(response.data)
+            for (let i = 0; i < cities.length; i++) {
+                if (cities[i].id === Number(id)) {
+                    cities.splice(i, 1)
+                    setShowAlert(true)
+                    const timer = setInterval(() => {
+                        setShowAlert(false)
+                        clearInterval(timer)
+                    }, 3000)
+                }
+            }
+        }, error => {
+            console.error(error)
+        })
+    }
 
 
     return (
@@ -31,15 +51,22 @@ const Home = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
+                        <Alert isOpen={showAlert}>
+                            alement supprimer avec success
+                        </Alert>
+                    </div>
+                    <div className="col-md-12">
                         <Card>
                             <CardHeader>
                                 <CardTitle>Villes
                                 </CardTitle>
-                                <Button
-                                    color="primary">
-                                    <FontAwesomeIcon className="mr-1" icon={faPlus}/>
-                                    NEW
-                                </Button>
+                                <Link to="/create-city">
+                                    <Button
+                                        color="primary">
+                                        <FontAwesomeIcon className="mr-1" icon={faPlus}/>
+                                        NEW
+                                    </Button>
+                                </Link>
                             </CardHeader>
                             <CardBody>
                                 <Table className="responsive" responsive>
@@ -92,6 +119,7 @@ const Home = () => {
                                                     </Button>
 
                                                     <Button
+                                                        onClick={e => deleteById(item?.id)}
                                                         className="m-1"
                                                         color="danger"
                                                         size="sm">
@@ -161,4 +189,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Ville

@@ -17,6 +17,7 @@ const Home = () => {
     const fetch_cities = async () => {
         try {
             const response = await axios.get('http://localhost:8037/api/villes/')
+            console.log(response.data)
             setCities(response.data)
         } catch (error) {
             console.error(error)
@@ -174,7 +175,7 @@ const Home = () => {
                                 <CardTitle>
                                     <Breadcrumb>
                                         <BreadcrumbItem>
-                                            <strong>Pharmacies</strong>
+                                            Pharmacies
                                         </BreadcrumbItem>
 
                                         {selectedCity !== null ? (
