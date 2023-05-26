@@ -32,7 +32,18 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
   padding: 10px;
 }
 
-.img__phar{
+.img__phar {
   width: 50px;
   border-radius: 5px;
+}
+
+.lib__phar {
+  font-weight: bold;
+  background: #73ef60;
+  padding: 5px 30px;
+  border-radius: 5px;
+}
+
+.leaflet-map {
+  height: 500px;
 }

@@ -46,6 +46,7 @@ const CreateZone = () => {
     const handleSubmit = async (event) => {
         const validationErrors = validateForm(formData)
         if (Object.keys(validationErrors).length === 0) {
+            formData.ville.zones = null
             // Form is valid, perform submission logic
             console.log(formData)
             ZoneService.save(formData).then(response => {

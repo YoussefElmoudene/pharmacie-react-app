@@ -1,9 +1,18 @@
 import {Breadcrumb, BreadcrumbItem, Button, Card, CardBody, CardHeader, CardTitle, Table} from 'reactstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import '../assets/scss/home.scss'
-import {faChevronDown, faHouseMedical, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons"
+import {
+    faChevronDown,
+    faHouseMedical,
+    faMap,
+    faMapMarker, faMapMarkerAlt,
+    faMapPin,
+    faPlus,
+    faTrash
+} from "@fortawesome/free-solid-svg-icons"
 import React, {useEffect, useState} from "react"
 import axios from 'axios'
+import {Link} from "react-router-dom"
 
 
 const Home = () => {
@@ -62,11 +71,13 @@ const Home = () => {
                             <CardHeader>
                                 <CardTitle>Villes
                                 </CardTitle>
-                                <Button
-                                    color="primary">
-                                    <FontAwesomeIcon className="mr-1" icon={faPlus}/>
-                                    NEW
-                                </Button>
+                                <Link to="/create-city">
+                                    <Button
+                                        color="primary">
+                                        <FontAwesomeIcon className="mr-1" icon={faPlus}/>
+                                        NEW
+                                    </Button>
+                                </Link>
                             </CardHeader>
                             <CardBody>
                                 <Table className="responsive" responsive>
@@ -196,33 +207,37 @@ const Home = () => {
                                     </Breadcrumb>
 
                                 </CardTitle>
-                                <Button
-                                    color="primary">
-                                    <FontAwesomeIcon className="mr-1" icon={faPlus}/>
-                                    NEW
-                                </Button>
+                                <Link to="/create-pharmacy">
+                                    <Button
+                                        color="primary">
+                                        <FontAwesomeIcon className="mr-1" icon={faPlus}/>
+                                        NEW
+                                    </Button>
+                                </Link>
                             </CardHeader>
                             <CardBody>
                                 <Table className="responsive" responsive>
                                     <thead>
                                     <tr>
-                                        <th scope='col' className='text-nowrap'>ID</th>
                                         <th scope='col' className='text-nowrap'>nom</th>
                                         <th scope='col' className='text-nowrap'>Address</th>
-                                        <th scope='col' className='text-nowrap'>Altitude</th>
-                                        <th scope='col' className='text-nowrap'>Longitude</th>
-
+                                        <th scope='col' className='text-nowrap'>details</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
                                     {pharmacies.map((item, index) => (
                                         <tr key={index}>
-                                            <td className='text-nowrap'>{item?.id}</td>
                                             <td className='text-nowrap'>{item?.name}</td>
                                             <td className='text-nowrap'>{item?.address}</td>
-                                            <td className='text-nowrap'>{item?.altitude}</td>
-                                            <td className='text-nowrap'>{item?.longitude}</td>
+                                            <td className='text-nowrap'>
+                                                <Link to={`/pharmacy/${item.id}`}>
+                                                    <Button
+                                                        color="warning">
+                                                        <FontAwesomeIcon className="mr-1" icon={faMapMarkerAlt}/>
+                                                    </Button>
+                                                </Link>
+                                            </td>
                                         </tr>
                                     ))}
                                     </tbody>

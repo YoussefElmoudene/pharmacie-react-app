@@ -25,6 +25,10 @@ const Routes = [
         component: lazy(() => import('../../views/pharmacy/Pharmacie'))
     },
     {
+        path: '/pharmacy/:id',
+        component: lazy(() => import('../../views/pharmacy/PharmacyDetail'))
+    },
+    {
         path: '/create-pharmacy',
         component: lazy(() => import('../../views/pharmacy/CreatePharmacie'))
     },

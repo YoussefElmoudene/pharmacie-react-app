@@ -18,6 +18,7 @@ const CreateGarde = () => {
             setPharmacies(response)
         })
         get_gardes().then(response => {
+            console.log(response)
             setGrades(response.data)
         })
     }, [])
@@ -62,6 +63,7 @@ const CreateGarde = () => {
         if (Object.keys(validationErrors).length === 0) {
             gardePharmacy.grade = formData.grade
             gardePharmacy.pharmacie = formData.pharmacie
+            gardePharmacy.pharmacie.zone = null
             gardePharmacy.pharmacieGardePK.datedebut = formData.datedebut
             gardePharmacy.pharmacieGardePK.datefin = formData.datefin
             gardePharmacy.pharmacieGardePK.grade = formData.grade.id

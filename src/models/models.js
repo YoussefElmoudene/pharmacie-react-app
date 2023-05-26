@@ -1,10 +1,10 @@
 const pharmacy = {
-    name: 'test',
-    address: 'test',
+    name: null,
+    address: null,
     image: '',
     zone: null,
-    altitude: 13130,
-    longitude: 31230
+    altitude: null,
+    longitude: null
 }
 const ville = {
     name: null

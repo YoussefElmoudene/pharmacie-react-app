@@ -1,7 +1,7 @@
 import {Alert, Button, Card, CardBody, CardHeader, CardTitle, Table} from 'reactstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import '../../assets/scss/home.scss'
-import {faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons"
+import {faMapMarkerAlt, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons"
 import React, {useEffect, useState} from "react"
 import axios from 'axios'
 import {Link} from "react-router-dom"
@@ -77,8 +77,6 @@ const Pharmacie = () => {
                                         <th scope='col' className='text-nowrap'></th>
                                         <th scope='col' className='text-nowrap'>nom</th>
                                         <th scope='col' className='text-nowrap'>Address</th>
-                                        <th scope='col' className='text-nowrap'>Altitude</th>
-                                        <th scope='col' className='text-nowrap'>Longitude</th>
                                         <th scope='col' className='text-nowrap'>action</th>
 
                                     </tr>
@@ -92,8 +90,6 @@ const Pharmacie = () => {
                                             </td>
                                             <td className='text-nowrap'>{item?.name}</td>
                                             <td className='text-nowrap'>{item?.address}</td>
-                                            <td className='text-nowrap'>{item?.altitude}</td>
-                                            <td className='text-nowrap'>{item?.longitude}</td>
                                             <td className="text-nowrap">
                                                 <Button
                                                     className="m-1"
@@ -109,6 +105,15 @@ const Pharmacie = () => {
                                                     size="sm">
                                                     <FontAwesomeIcon icon={faTrash}/>
                                                 </Button>
+
+                                                <Link to={`/pharmacy/${item.id}`}>
+                                                    <Button
+                                                        className="m-1"
+                                                        size="sm"
+                                                        color="primary">
+                                                        <FontAwesomeIcon className="mr-1" icon={faMapMarkerAlt}/>
+                                                    </Button>
+                                                </Link>
 
                                             </td>
                                         </tr>
