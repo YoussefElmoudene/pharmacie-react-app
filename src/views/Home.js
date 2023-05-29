@@ -142,12 +142,15 @@ const Home = () => {
                                                                     {zone?.nom}
                                                                 </th>
                                                                 <td>
-                                                                    <Button
-                                                                        className="m-1"
-                                                                        color="primary"
-                                                                        size="sm">
-                                                                        <FontAwesomeIcon icon={faPlus}/>
-                                                                    </Button>
+                                                                    <Link to="/create-zone">
+                                                                        <Button
+                                                                            className="m-1"
+                                                                            color="primary"
+                                                                            size="sm">
+                                                                            <FontAwesomeIcon icon={faPlus}/>
+                                                                        </Button>
+                                                                    </Link>
+
 
                                                                     <Button
                                                                         className="m-1"

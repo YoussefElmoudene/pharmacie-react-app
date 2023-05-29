@@ -1,4 +1,4 @@
-import {Alert, Button, Card, CardBody, CardHeader, CardTitle, Table} from 'reactstrap'
+import {Alert, Button, Card, CardBody, CardHeader, CardTitle, Col, FormGroup, Input, Table} from 'reactstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons"
 import React, {useEffect, useState} from "react"
@@ -10,11 +10,25 @@ const Zone = () => {
     const [zones, setZones] = useState([])
     const [showAlert, setShowAlert] = useState(false)
 
-    useEffect(() => {
+
+    function getZones() {
         ZoneService.getAll().then(response => {
+            console.log(response)
             setZones(response)
         })
+    }
+
+    useEffect(() => {
+        getZones()
     }, [])
+
+    const filterZones = (inputValue) => {
+        if (inputValue.trim() === '') {
+            getZones()
+        }
+        const filteredZones = zones.filter((zone) => zone.nom.toLowerCase().includes(inputValue.toLowerCase()) || zone.id.toString().includes(inputValue.toLowerCase()) || zone.ville.toLowerCase().includes(inputValue.toLowerCase()))
+        setZones(filteredZones)
+    }
 
     const deleteById = (id) => {
         alert(id)
@@ -49,6 +63,17 @@ const Zone = () => {
                         <CardHeader>
                             <CardTitle>Zones
                             </CardTitle>
+
+                            <FormGroup row>
+                                <Col sm='12'>
+                                    <Input
+                                        onChange={e => filterZones(e.target.value)}
+                                        type='text'
+                                        name='search' id='search'
+                                        placeholder='search..'/>
+                                </Col>
+                            </FormGroup>
+
                             <Link to="/create-zone">
                                 <Button
                                     color="primary">
@@ -78,30 +103,28 @@ const Zone = () => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {zones.map((item, index) => (
-                                    <tr key={index}>
-                                        <td className='text-nowrap icon'>{item.id}</td>
-                                        <td className='text-nowrap icon'>{item.nom}</td>
-                                        <td className='text-nowrap icon'>{item.ville}</td>
-                                        <td className="text-nowrap">
-                                            <Button
-                                                className="m-1"
-                                                color="warning"
-                                                size="sm">
-                                                <FontAwesomeIcon icon={faPen}/>
-                                            </Button>
+                                {zones.map((item, index) => (<tr key={index}>
+                                    <td className='text-nowrap icon'>{item.id}</td>
+                                    <td className='text-nowrap icon'>{item.nom}</td>
+                                    <td className='text-nowrap icon'>{item.ville}</td>
+                                    <td className="text-nowrap">
+                                        <Button
+                                            className="m-1"
+                                            color="warning"
+                                            size="sm">
+                                            <FontAwesomeIcon icon={faPen}/>
+                                        </Button>
 
-                                            <Button
-                                                onClick={e => deleteById(item.id)}
-                                                className="m-1"
-                                                color="danger"
-                                                size="sm">
-                                                <FontAwesomeIcon icon={faTrash}/>
-                                            </Button>
+                                        <Button
+                                            onClick={e => deleteById(item.id)}
+                                            className="m-1"
+                                            color="danger"
+                                            size="sm">
+                                            <FontAwesomeIcon icon={faTrash}/>
+                                        </Button>
 
-                                        </td>
-                                    </tr>
-                                ))}
+                                    </td>
+                                </tr>))}
                                 </tbody>
                             </Table>
                         </CardBody>

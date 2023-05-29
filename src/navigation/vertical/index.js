@@ -32,11 +32,5 @@ export default [
         title: 'gardes',
         icon: <FontAwesomeIcon icon={faMapMarker} size={20}/>,
         navLink: '/gardes'
-    },
-    {
-        id: 'secondPage',
-        title: 'Second Page',
-        icon: <Mail size={20}/>,
-        navLink: '/second-page'
     }
 ]

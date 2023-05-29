@@ -1,17 +1,38 @@
-import {Alert, Button, Card, CardBody, CardHeader, CardTitle, Table} from 'reactstrap'
+import {Alert, Button, Card, CardBody, CardHeader, CardTitle, Col, FormGroup, Input, Label, Table} from 'reactstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import '../../assets/scss/home.scss'
-import {faMapMarkerAlt, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons"
+import {faMapMarkerAlt, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons"
 import React, {useEffect, useState} from "react"
 import axios from 'axios'
 import {Link} from "react-router-dom"
 import PharmacyService from "../../services/pharmacyService"
+import {get_villes} from "../../services/vlleService"
+import ZoneService from "../../services/zoneService"
+import GardeService from "../../services/gardeService"
 
 
 const Pharmacie = () => {
     const [pharmacies, setPharmacies] = useState([])
+    const [villes, setvilles] = useState([])
+    const [zones, setzones] = useState([])
     const [showAlert, setShowAlert] = useState(false)
+    const [formData, setFormData] = useState(null)
 
+
+    const handleChange = (event) => {
+        const name = event.target.name
+        let value = event.target.value
+        if (event.target.name === 'ville') {
+            value = villes.filter(z => z.id === Number(value))[0]
+            setzones(value.zones)
+        } else if (event.target.name === 'zone') {
+            value = zones.filter(z => z.id === Number(value))[0]
+        }
+        console.log(value)
+        setFormData((prevFormData) => ({
+            ...prevFormData, [name]: value
+        }))
+    }
 
     const deleteById = (id) => {
         alert(id)
@@ -44,8 +65,39 @@ const Pharmacie = () => {
 
     useEffect(() => {
         fetch_pharmacies()
+        get_villes().then(response => {
+            console.info(response.data)
+            setvilles(response.data)
+        })
+        ZoneService.getAll().then(response => {
+            setzones(response)
+        })
     }, [])
 
+
+    function searchPharmacy() {
+        if (!formData?.zone || !formData?.ville) {
+            fetch_pharmacies()
+        } else {
+            console.log(formData)
+            GardeService.findPharmacieByNomVilleAndZone(formData.zone.nom, formData.ville.nom).then(response => {
+                console.log(response)
+                setPharmacies(response)
+            }, error => {
+                console.error(error)
+            })
+        }
+        if (formData?.zone && formData?.datedebut) {
+            GardeService.find_disponible_pharmacy(formData.zone.id, formData.datedebut).then(response => {
+                console.log(response)
+                setPharmacies(response)
+            }, error => {
+                console.error(error)
+            })
+        }
+
+        setFormData(null)
+    }
 
     return (
         <div>
@@ -61,11 +113,62 @@ const Pharmacie = () => {
                             <CardHeader>
                                 <CardTitle>Pharmacies
                                 </CardTitle>
+
+                                <FormGroup row>
+                                    <Col sm='12'>
+                                        <Input
+                                            onChange={handleChange}
+                                            type='select'
+                                            name='ville' id='ville'
+                                            placeholder='ville..'>
+                                            <option selected value={null}>select ville</option>
+                                            {villes.map((item, index) => (
+                                                <option value={item.id}>{item?.nom}</option>))}
+
+                                        </Input>
+                                    </Col>
+                                </FormGroup>
+
+                                <FormGroup row>
+                                    <Col sm='12'>
+                                        <Input
+                                            onChange={handleChange}
+                                            type='select'
+                                            name='zone' id='zone'
+                                            placeholder='zone..'>
+                                            <option selected value={null}>select zone</option>
+                                            {zones.map((item, index) => (
+                                                <option value={item.id}>{item?.nom}</option>))}
+                                        </Input>
+                                    </Col>
+                                </FormGroup>
+
+
+                                <FormGroup row>
+                                    <Label sm='3' for='datefin'>
+                                        date
+                                    </Label>
+                                    <Col sm='9'>
+                                        <Input
+                                            onChange={handleChange}
+                                            type='date'
+                                            name='datedebut' id='datedebut'
+                                            placeholder='date debut..'/>
+                                    </Col>
+                                </FormGroup>
+
+                                <Button
+                                    className="m-1"
+                                    onClick={e => searchPharmacy()}
+                                    size="sm"
+                                    color="info">
+                                    <FontAwesomeIcon className="mr-1" icon={faSearch}/>
+                                </Button>
+
                                 <Link to="/create-pharmacy">
                                     <Button
                                         color="primary">
                                         <FontAwesomeIcon className="mr-1" icon={faPlus}/>
-                                        NEW
                                     </Button>
                                 </Link>
 
