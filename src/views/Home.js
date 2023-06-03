@@ -18,14 +18,13 @@ import {Link} from "react-router-dom"
 const Home = () => {
     const [selectedCity, setSelectedCity] = useState(null)
     const [selectedZone, setSelectedZone] = useState(null)
-
-    const url = 'http://localhost:8037/api/'
+    const URL = 'https://pharmacymanagementback-production.up.railway.app'
     const [isVisible, setIsVisible] = useState(false)
     const [cities, setCities] = useState([])
     const [pharmacies, setPharmacies] = useState([])
     const fetch_cities = async () => {
         try {
-            const response = await axios.get('http://localhost:8037/api/villes/')
+            const response = await axios.get(`${URL}/api/villes/`)
             console.log(response.data)
             setCities(response.data)
         } catch (error) {
@@ -35,7 +34,7 @@ const Home = () => {
 
     const fetch_pharmacies = async () => {
         try {
-            const response = await axios.get('http://localhost:8037/api/pharmacies/')
+            const response = await axios.get(`${URL}/api/pharmacies/`)
             setPharmacies(response.data)
             console.log(response)
         } catch (error) {

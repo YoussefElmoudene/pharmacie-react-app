@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-const API_URL = 'http://localhost:8037/api/pharmacies/'
+const API_URL = 'https://pharmacymanagementback-production.up.railway.app/api/pharmacies/'
 
 
 const PharmacyService = {

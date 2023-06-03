@@ -1,7 +1,7 @@
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 
-const API_URL = 'http://localhost:8037/api/v1/authentication/authenticate'
+const API_URL = 'https://pharmacymanagementback-production.up.railway.app/api/v1/authentication/authenticate'
 
 const setAuthToken = token => {
     if (token) {

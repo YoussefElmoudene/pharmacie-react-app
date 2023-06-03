@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-const API_URL = 'http://localhost:8037/api/zone/'
+const API_URL = 'https://pharmacymanagementback-production.up.railway.app/api/zone/'
 
 
 const ZoneService = {

@@ -1,8 +1,8 @@
 import axios from "axios"
 
 
-const API_URL = 'http://localhost:8037/api/pharmacieGarde/'
-const API_URL_VILLE = 'http://localhost:8037/api/villes/'
+const API_URL = 'https://pharmacymanagementback-production.up.railway.app/api/pharmacieGarde/'
+const API_URL_VILLE = 'https://pharmacymanagementback-production.up.railway.app/api/villes/'
 
 
 const GardeService = {
