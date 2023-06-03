@@ -30,11 +30,9 @@ const isTokenExpired = token => {
 
 const login = async (email, password) => {
     const response = await axios.post(`${API_URL}`, {email, password})
-    const token = response.data.token
-    console.log(token)
     console.log(response)
-    localStorage.setItem('token', token)
-    setAuthToken(token)
+    localStorage.setItem('user', JSON.stringify(response.data))
+    window.location.href = '/home'
 }
 
 const register = async (name, email, password) => {
