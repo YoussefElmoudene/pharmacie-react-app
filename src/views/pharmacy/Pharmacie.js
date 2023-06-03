@@ -55,7 +55,7 @@ const Pharmacie = () => {
 
     const fetch_pharmacies = async () => {
         try {
-            const response = await axios.get('http://localhost:8037/api/pharmacies/')
+            const response = await axios.get('https://pharmacymanagementback-production.up.railway.app/api/pharmacies/')
             setPharmacies(response.data)
             console.log(response)
         } catch (error) {
